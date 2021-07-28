@@ -46,13 +46,6 @@
 
   
   <url>
-    <loc>http://wangxu1905.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2021-07-28</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://wangxu1905.github.io/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/</loc>
     <lastmod>2021-07-28</lastmod>
     <changefreq>daily</changefreq>
@@ -60,7 +53,14 @@
   </url>
   
   <url>
-    <loc>http://wangxu1905.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8C%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%8CBFS%EF%BC%8CDFS/</loc>
+    <loc>http://wangxu1905.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91-%E5%93%88%E5%B8%8C%E8%A1%A8-BFS-DFS/</loc>
+    <lastmod>2021-07-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://wangxu1905.github.io/tags/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2021-07-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
