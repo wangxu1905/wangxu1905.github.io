@@ -4,6 +4,46 @@
   
     
     <entry>
+      <title>C/C++取整函数ceil，floor，fix，round</title>
+      <link href="/2021/07/29/C++%E5%8F%96%E6%95%B4%E5%87%BD%E6%95%B0ceil%EF%BC%88%E5%90%91%E4%B8%8A%E5%8F%96%E6%95%B4%EF%BC%89%E5%92%8Cfloor%EF%BC%88%E5%90%91%E4%B8%8B%E5%8F%96%E6%95%B4%EF%BC%89/"/>
+      <url>/2021/07/29/C++%E5%8F%96%E6%95%B4%E5%87%BD%E6%95%B0ceil%EF%BC%88%E5%90%91%E4%B8%8A%E5%8F%96%E6%95%B4%EF%BC%89%E5%92%8Cfloor%EF%BC%88%E5%90%91%E4%B8%8B%E5%8F%96%E6%95%B4%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<span id="more"></span><p>使用ceil函数。ceil(x)返回的是大于x的最小整数(朝正无穷方向取整)。<br>    ceil(10.5) == 11    ceil(-10.5) ==-10</p><p>使用floor函数。floor(x)返回的是小于或等于x的最大整数(朝负无穷方向取整)。<br>    floor(10.5) == 10    floor(-10.5) == -11</p><p>使用fix函数。fix(x)是朝零方向取整 。<br>    fix(-1.3)=-1; fix(1.3)=1;</p><p>使用round函数。round(x)是四舍五入到最近的整数。<br>    round(-1.3)=-1;round(-1.52)=-2;round(1.3)=1;round(1.52)=2</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> C++函数 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>1104. 二叉树寻路</title>
+      <link href="/2021/07/29/1104.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AF%BB%E8%B7%AF/"/>
+      <url>/2021/07/29/1104.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AF%BB%E8%B7%AF/</url>
+      
+        <content type="html"><![CDATA[<span id="more"></span><p>在一棵无限的二叉树上，每个节点都有两个子节点，树中的节点 逐行 依次按 “之” 字形进行标记。</p><p>如下图所示，在奇数行（即，第一行、第三行、第五行……）中，按从左到右的顺序进行标记；</p><p>而偶数行（即，第二行、第四行、第六行……）中，按从右到左的顺序进行标记。</p><p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2019/06/28/tree.png"></p><p>给你树上某一个节点的标号 label，请你返回从根节点到该标号为 label 节点的路径，该路径是由途经的节点标号所组成的。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/path-in-zigzag-labelled-binary-tree">https://leetcode-cn.com/problems/path-in-zigzag-labelled-binary-tree</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><p><strong>示例 1：</strong></p><blockquote><p>输入：label = 14<br>输出：[1,3,4,14]</p></blockquote><p><strong>示例 2：</strong></p><blockquote><p>输入：label = 26<br>输出：[1,2,6,10,26]</p></blockquote><p><strong>提示：</strong></p><ul><li>1 &lt;= label &lt;= 10^6</li></ul><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>​    如果是正常二叉树标记顺序，每个结点的父结点值应为子节点值 val / 2。而在这种 “之” 字形排序下，父结点应为正常父结点在当层的 <strong>对称位置</strong>。</p><p>​    每层节点对称结点和为定值，用该值减去val/2,即可得到对称后label父节点的值。</p><p>​    假设当前层为level:当前层最小值:<strong>pow(2 , level - 1)</strong> ,最大值:<strong>pow(2 , level) - 1</strong>，对称后level的父节点为<strong>pow(2 , level - 1) + pow(2 , level) - 1 - label  /  2</strong>,然后进行循环，取得路径。</p><h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">pathInZigZagTree</span><span class="params">(<span class="keyword">int</span> label)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//int level = ceil(log(label + 1) / log(2));</span></span><br><span class="line">        <span class="keyword">int</span> level = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">pow</span>(<span class="number">2</span>,level) &lt;= label)</span><br><span class="line">            ++level;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">ret</span><span class="params">(level)</span></span>;</span><br><span class="line">        <span class="keyword">while</span>(level--)&#123;</span><br><span class="line">            ret[level]=label;</span><br><span class="line">            label=<span class="built_in">pow</span>(<span class="number">2</span>,level)<span class="number">-1</span>+<span class="built_in">pow</span>(<span class="number">2</span>,level<span class="number">-1</span>)-label/<span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 二叉树 </tag>
+            
+            <tag> 数学 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>863. 二叉树中所有距离为 K 的结点</title>
       <link href="/2021/07/28/863.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E6%89%80%E6%9C%89%E8%B7%9D%E7%A6%BB%E4%B8%BA%20K%20%E7%9A%84%E7%BB%93%E7%82%B9/"/>
       <url>/2021/07/28/863.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E6%89%80%E6%9C%89%E8%B7%9D%E7%A6%BB%E4%B8%BA%20K%20%E7%9A%84%E7%BB%93%E7%82%B9/</url>
