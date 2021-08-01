@@ -6,7 +6,7 @@
   <link href="http://wangxu1905.github.io/atom.xml" rel="self"/>
   
   <link href="http://wangxu1905.github.io/"/>
-  <updated>2021-07-31T02:30:25.120Z</updated>
+  <updated>2021-08-01T02:28:11.686Z</updated>
   <id>http://wangxu1905.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>1337. 矩阵中战斗力最弱的 K 行</title>
+    <link href="http://wangxu1905.github.io/2021/08/01/1337.%20%E7%9F%A9%E9%98%B5%E4%B8%AD%E6%88%98%E6%96%97%E5%8A%9B%E6%9C%80%E5%BC%B1%E7%9A%84%20K%20%E8%A1%8C/"/>
+    <id>http://wangxu1905.github.io/2021/08/01/1337.%20%E7%9F%A9%E9%98%B5%E4%B8%AD%E6%88%98%E6%96%97%E5%8A%9B%E6%9C%80%E5%BC%B1%E7%9A%84%20K%20%E8%A1%8C/</id>
+    <published>2021-08-01T02:01:47.168Z</published>
+    <updated>2021-08-01T02:28:11.686Z</updated>
+    
+    <content type="html"><![CDATA[<span id="more"></span><p>给你一个大小为 m * n 的矩阵 mat，矩阵由若干军人和平民组成，分别用 1 和 0 表示。</p><p>请你返回矩阵中战斗力最弱的 k 行的索引，按从最弱到最强排序。</p><p>如果第 i 行的军人数量少于第 j 行，或者两行军人数量相同但 i 小于 j，那么我们认为第 i 行的战斗力比第 j 行弱。</p><p>军人 总是 排在一行中的靠前位置，也就是说 1 总是出现在 0 之前。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/the-k-weakest-rows-in-a-matrix">https://leetcode-cn.com/problems/the-k-weakest-rows-in-a-matrix</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><p><strong>示例 1：</strong></p><blockquote><p><strong>输入：</strong>mat =<br>[[1,1,0,0,0],<br> [1,1,1,1,0],<br> [1,0,0,0,0],<br> [1,1,0,0,0],<br> [1,1,1,1,1]],<br>k = 3<br><strong>输出：</strong>[2,0,3]<br><strong>解释：</strong><br>每行中的军人数目：<br>行 0 -&gt; 2<br>行 1 -&gt; 4<br>行 2 -&gt; 1<br>行 3 -&gt; 2<br>行 4 -&gt; 5<br>从最弱到最强对这些行排序后得到 [2,0,3,1,4]</p></blockquote><p><strong>示例 2：</strong></p><blockquote><p><strong>输入：</strong>mat =<br>[[1,0,0,0],<br> [1,1,1,1],<br> [1,0,0,0],<br> [1,0,0,0]],<br>k = 2<br><strong>输出：</strong>[0,2]<br><strong>解释：</strong><br>每行中的军人数目：<br>行 0 -&gt; 1<br>行 1 -&gt; 4<br>行 2 -&gt; 1<br>行 3 -&gt; 1<br>从最弱到最强对这些行排序后得到 [0,2,3,1]</p></blockquote><p><strong>提示：</strong></p><ul><li>m == mat.length</li><li>n == mat[i].length</li><li>2 &lt;= n, m &lt;= 100</li><li>1 &lt;= k &lt;= m</li><li>matrix[i][j] 不是 0 就是 1</li></ul><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p><strong>二元组：</strong>因为map不能自己实现sort排序，所以采用tuple二元组，利用二分查找记录大小，存储行和大小，然后sort排序，最后返回结果。<br>​    二分查找：找出一行中最后那个1的位置，如果其位置为pos,那么这一行 1 的个数为pos + 1，如果这一行没有 1，那么令pos = -1。</p><p><strong>优先队列：</strong>题目给定的是判断第 i行弱于第 j 行的判断依据，我们便维护一个优先队列，按照 pair&lt;士兵数量，行索引&gt; 的方式将每行信息存入优先队列。由于默认为大顶堆，我们要找最小的 K行，则需要先将前 n - K行忽略（在代码中弹出队列即可），将后 K 行存入结果序列后，再逆序即可（逆序是因为从队列访问顺序是从强到弱，而我们需要从弱到强）。</p><h2 id="实现代码（二元组）"><a href="#实现代码（二元组）" class="headerlink" title="实现代码（二元组）"></a>实现代码（二元组）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(tuple&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; &amp;a,tuple&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; &amp;b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(get&lt;<span class="number">1</span>&gt;(a) == get&lt;<span class="number">1</span>&gt;(b))  </span><br><span class="line">            <span class="keyword">return</span> get&lt;<span class="number">0</span>&gt;(a) &lt; get&lt;<span class="number">0</span>&gt;(b);</span><br><span class="line">        <span class="keyword">return</span> get&lt;<span class="number">1</span>&gt;(a)&lt;get&lt;<span class="number">1</span>&gt;(b);</span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">kWeakestRows</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; mat, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        tuple&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;  res[mat.<span class="built_in">size</span>()];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; mat.<span class="built_in">size</span>();++i)&#123;</span><br><span class="line">            get&lt;<span class="number">0</span>&gt;(res[i]) = i;</span><br><span class="line">            <span class="keyword">int</span> l = <span class="number">0</span>,r = mat[<span class="number">0</span>].<span class="built_in">size</span>() - <span class="number">1</span>,pos = <span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">while</span>(l &lt;= r)&#123;</span><br><span class="line">                <span class="keyword">int</span> mid = (l + r) /<span class="number">2</span>;</span><br><span class="line">                <span class="keyword">if</span>(mat[i][mid]) &#123;</span><br><span class="line">                    pos = mid;</span><br><span class="line">                    l = mid + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>    r = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            get&lt;<span class="number">1</span>&gt;(res[i]) = pos + <span class="number">1</span>; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(res,res+mat.<span class="built_in">size</span>(),cmp);</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; ret;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k;++i)</span><br><span class="line">            ret.<span class="built_in">push_back</span>(get&lt;<span class="number">0</span>&gt;(res[i]));</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><ul><li>时间复杂度：O（max(mlogn,n<em>log2(n))）<br>二分查找：O（mlogn）<br>sort排序：O（n</em>log2(n)）</li><li>空间复杂度：O（n）</li></ul><h2 id="实现代码（优先队列）"><a href="#实现代码（优先队列）" class="headerlink" title="实现代码（优先队列）"></a>实现代码（优先队列）</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">kWeakestRows</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; mat, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        priority_queue&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; q;</span><br><span class="line">        <span class="keyword">int</span> n = mat.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="comment">// 记录当前行士兵个数</span></span><br><span class="line">            <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> x : mat[i]) &#123;</span><br><span class="line">                <span class="comment">// x = 0 不会影响结果</span></span><br><span class="line">                cnt += x;</span><br><span class="line">            &#125;</span><br><span class="line">            q.<span class="built_in">push</span>(&#123;cnt, i&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 当前优先队列是从强到弱排的</span></span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; ret;</span><br><span class="line">        <span class="keyword">while</span>(q.<span class="built_in">size</span>() &gt; k) q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">while</span>(!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            ret.<span class="built_in">push_back</span>(q.<span class="built_in">top</span>().second);</span><br><span class="line">            q.<span class="built_in">pop</span>();</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="built_in">reverse</span>(ret.<span class="built_in">begin</span>(), ret.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h2 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h2><ul><li>时间复杂度：O(max(nm, nlgn))，首先遍历了一遍矩阵，复杂度 O(nm)，将每行存入优先队列复杂度 O(nlgn)。</li><li>空间复杂度：O(n)</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;p&gt;给你一个大小为 m * n 的矩阵 mat，矩阵由若干军人和平民组成，分别用 1 和 0 表示。&lt;/p&gt;
+&lt;p&gt;请你返回矩阵中战斗力最弱的 k 行的索引，按从最弱到最强排序。&lt;/p&gt;
+&lt;p&gt;如果第 i 行的军人数量少于第 j</summary>
+      
+    
+    
+    
+    
+    <category term="二元组" scheme="http://wangxu1905.github.io/tags/%E4%BA%8C%E5%85%83%E7%BB%84/"/>
+    
+    <category term="优先队列" scheme="http://wangxu1905.github.io/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/"/>
+    
+  </entry>
   
   <entry>
     <title>C++ STL vector的push_back()和emplace_back()</title>
@@ -63,9 +91,9 @@
     
     <category term="二叉树" scheme="http://wangxu1905.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
-    <category term="DFS" scheme="http://wangxu1905.github.io/tags/DFS/"/>
-    
     <category term="三元组" scheme="http://wangxu1905.github.io/tags/%E4%B8%89%E5%85%83%E7%BB%84/"/>
+    
+    <category term="DFS" scheme="http://wangxu1905.github.io/tags/DFS/"/>
     
   </entry>
   
@@ -172,9 +200,9 @@
     
     <category term="哈希表" scheme="http://wangxu1905.github.io/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
     
-    <category term="BFS" scheme="http://wangxu1905.github.io/tags/BFS/"/>
-    
     <category term="DFS" scheme="http://wangxu1905.github.io/tags/DFS/"/>
+    
+    <category term="BFS" scheme="http://wangxu1905.github.io/tags/BFS/"/>
     
   </entry>
   
