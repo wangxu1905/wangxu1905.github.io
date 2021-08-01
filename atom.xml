@@ -6,7 +6,7 @@
   <link href="http://wangxu1905.github.io/atom.xml" rel="self"/>
   
   <link href="http://wangxu1905.github.io/"/>
-  <updated>2021-08-01T02:28:11.686Z</updated>
+  <updated>2021-08-01T09:27:25.386Z</updated>
   <id>http://wangxu1905.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>POJ-1979 Red and Black</title>
+    <link href="http://wangxu1905.github.io/2021/08/01/POJ-1979%20Red%20and%20Black/"/>
+    <id>http://wangxu1905.github.io/2021/08/01/POJ-1979%20Red%20and%20Black/</id>
+    <published>2021-08-01T09:19:44.814Z</published>
+    <updated>2021-08-01T09:27:25.386Z</updated>
+    
+    <content type="html"><![CDATA[<span id="more"></span><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>There is a rectangular room, covered with square tiles. Each tile is colored either red or black. A man is standing on a black tile. From a tile, he can move to one of four adjacent tiles. But he can’t move on red tiles, he can move only on black tiles.</p><p>Write a program to count the number of black tiles which he can reach by repeating the moves described above.</p><h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>The input consists of multiple data sets. A data set starts with a line containing two positive integers W and H; W and H are the numbers of tiles in the x- and y- directions, respectively. W and H are not more than 20.</p><p>There are H more lines in the data set, each of which includes W characters. Each character represents the color of a tile as follows.</p><p>‘.’ - a black tile<br>‘#’ - a red tile<br>‘@’ - a man on a black tile(appears exactly once in a data set)<br>The end of the input is indicated by a line consisting of two zeros.</p><h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>For each data set, your program should output a line which contains the number of tiles he can reach from the initial tile (including itself).</p><h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span> <span class="number">9</span></span><br><span class="line">....#.</span><br><span class="line">.....#</span><br><span class="line">......</span><br><span class="line">......</span><br><span class="line">......</span><br><span class="line">......</span><br><span class="line">......</span><br><span class="line">#@...#</span><br><span class="line">.#..#.</span><br><span class="line"><span class="number">11</span> <span class="number">9</span></span><br><span class="line">.#.........</span><br><span class="line">.#.#######.</span><br><span class="line">.#.#.....#.</span><br><span class="line">.#.#.###.#.</span><br><span class="line">.#.#..@#.#.</span><br><span class="line">.#.#####.#.</span><br><span class="line">.#.......#.</span><br><span class="line">.#########.</span><br><span class="line">...........</span><br><span class="line"><span class="number">11</span> <span class="number">6</span></span><br><span class="line">..#..#..#..</span><br><span class="line">..#..#..#..</span><br><span class="line">..#..#..###</span><br><span class="line">..#..#..#@.</span><br><span class="line">..#..#..#..</span><br><span class="line">..#..#..#..</span><br><span class="line"><span class="number">7</span> <span class="number">7</span></span><br><span class="line">..#.#..</span><br><span class="line">..#.#..</span><br><span class="line">###.###</span><br><span class="line">...@...</span><br><span class="line">###.###</span><br><span class="line">..#.#..</span><br><span class="line">..#.#..</span><br><span class="line"><span class="number">0</span> <span class="number">0</span></span><br></pre></td></tr></table></figure><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">45</span></span><br><span class="line"><span class="number">59</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">13</span></span><br></pre></td></tr></table></figure><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>​    直接DFS，通过visited数组记录是否走过，避免重复访问，然后对当前节点进行移动，返回结果</p><h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 21</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">int</span> m,n,sx,sy;</span><br><span class="line"><span class="keyword">int</span> dx[<span class="number">4</span>] = &#123;<span class="number">1</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> dy[<span class="number">4</span>] = &#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">-1</span>&#125;;</span><br><span class="line"><span class="keyword">char</span> mar[N][N];</span><br><span class="line"><span class="keyword">int</span> visited[N][N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    visited[x][y] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">4</span>;++i)&#123;</span><br><span class="line">        <span class="keyword">int</span> nx = x + dx[i],ny = y + dy[i];</span><br><span class="line">        <span class="keyword">if</span>(nx &lt; <span class="number">1</span> || nx &gt; n|| ny &lt; <span class="number">1</span> || ny &gt; m)    <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(visited[nx][ny] || mar[nx][ny] != <span class="string">&#x27;.&#x27;</span>)   <span class="keyword">continue</span>;</span><br><span class="line">        ret += <span class="built_in">dfs</span>(nx,ny);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(cin &gt;&gt; m &gt;&gt; n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span> &amp;&amp; m == <span class="number">0</span>)    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">memset</span>(visited,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(visited));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; ++j)&#123;</span><br><span class="line">                cin &gt;&gt; mar[i][j];</span><br><span class="line">                <span class="keyword">if</span>(mar[i][j] == <span class="string">&#x27;@&#x27;</span>)    sx = i,sy = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; <span class="built_in">dfs</span>(sx,sy) &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;h2 id=&quot;Description&quot;&gt;&lt;a href=&quot;#Description&quot; class=&quot;headerlink&quot; title=&quot;Description&quot;&gt;&lt;/a&gt;Description&lt;/h2&gt;&lt;p&gt;There is </summary>
+      
+    
+    
+    
+    
+    <category term="DFS" scheme="http://wangxu1905.github.io/tags/DFS/"/>
+    
+  </entry>
   
   <entry>
     <title>1337. 矩阵中战斗力最弱的 K 行</title>
@@ -91,9 +115,9 @@
     
     <category term="二叉树" scheme="http://wangxu1905.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
-    <category term="三元组" scheme="http://wangxu1905.github.io/tags/%E4%B8%89%E5%85%83%E7%BB%84/"/>
-    
     <category term="DFS" scheme="http://wangxu1905.github.io/tags/DFS/"/>
+    
+    <category term="三元组" scheme="http://wangxu1905.github.io/tags/%E4%B8%89%E5%85%83%E7%BB%84/"/>
     
   </entry>
   
@@ -200,9 +224,9 @@
     
     <category term="哈希表" scheme="http://wangxu1905.github.io/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
     
-    <category term="DFS" scheme="http://wangxu1905.github.io/tags/DFS/"/>
-    
     <category term="BFS" scheme="http://wangxu1905.github.io/tags/BFS/"/>
+    
+    <category term="DFS" scheme="http://wangxu1905.github.io/tags/DFS/"/>
     
   </entry>
   
