@@ -6,7 +6,7 @@
   <link href="http://wangxu1905.github.io/atom.xml" rel="self"/>
   
   <link href="http://wangxu1905.github.io/"/>
-  <updated>2021-08-02T11:19:31.009Z</updated>
+  <updated>2021-08-03T03:33:30.340Z</updated>
   <id>http://wangxu1905.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>581. 最短无序连续子数组</title>
+    <link href="http://wangxu1905.github.io/2021/08/03/581.%20%E6%9C%80%E7%9F%AD%E6%97%A0%E5%BA%8F%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/"/>
+    <id>http://wangxu1905.github.io/2021/08/03/581.%20%E6%9C%80%E7%9F%AD%E6%97%A0%E5%BA%8F%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/</id>
+    <published>2021-08-03T01:09:17.116Z</published>
+    <updated>2021-08-03T03:33:30.340Z</updated>
+    
+    <content type="html"><![CDATA[<span id="more"></span><p>给你一个整数数组 nums ，你需要找出一个 连续子数组 ，如果对这个子数组进行升序排序，那么整个数组都会变为升序排序。</p><p>请你找出符合题意的 最短 子数组，并输出它的长度。</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray">https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p><p><strong>示例 1：</strong></p><blockquote><p>输入：nums = [2,6,4,8,10,9,15]<br>输出：5<br>解释：你只需要对 [6, 4, 8, 10, 9] 进行升序排序，那么整个表都会变为升序排序。</p></blockquote><p><strong>示例 2：</strong></p><blockquote><p>输入：nums = [1,2,3,4]<br>输出：0</p></blockquote><p><strong>示例 3：</strong></p><blockquote><p>输入：nums = [1]<br>输出：0</p></blockquote><p><strong>提示：</strong></p><ul><li>1 &lt;= nums.length &lt;= 104</li><li>-105 &lt;= nums[i] &lt;= 105</li></ul><h2 id="题解（双指针）"><a href="#题解（双指针）" class="headerlink" title="题解（双指针）"></a>题解（双指针）</h2><p>​        将数组分成三部分numsA,numsB,numsC，然后对numsB进行排序，使整体数组有序，即整体排序后numsA和numsC不变。我们只要找到numsB，返回其长度即可。<br>      我们创建数组nums的拷贝t,然后对其排序，分别从左和右进行比较，找到第一个不相同的位置，确定numsB的左边界和右边界，返回numsB的长度。<br>      特别地，当原数组有序时，numB的长度为0，直接返回结果。</p><h2 id="实现代码：（双指针）"><a href="#实现代码：（双指针）" class="headerlink" title="实现代码：（双指针）"></a>实现代码：（双指针）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findUnsortedSubarray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">is_sorted</span>(nums.<span class="built_in">begin</span>(),nums.<span class="built_in">end</span>())) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; t = nums;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>,right = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">sort</span>(t.<span class="built_in">begin</span>(),t.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">while</span>(t[left] == nums[left])</span><br><span class="line">            ++left;</span><br><span class="line">        <span class="keyword">while</span>(t[right] == nums[right])</span><br><span class="line">            --right;</span><br><span class="line">        <span class="keyword">return</span> right - left + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>​    <strong>时间复杂度：</strong>O(nlogn)，其中 n 为给定数组的长度。我们需要 O(nlogn) 的时间进行排序，以及 O(n) 的时间遍历数组，因此总时间复杂度为O(nlogn)。</p><p>​    <strong>空间复杂度：</strong>O(n)，其中 n为给定数组的长度。我们需要额外的一个数组保存排序后的数组t.</p><h2 id="题解（一次遍历）"><a href="#题解（一次遍历）" class="headerlink" title="题解（一次遍历）"></a>题解（一次遍历）</h2><p>​    假设numsB在nums中对应区间为 [left,right],注意到numsB和numsC的任意一个数都大于等于numsA中任意一个数，因此有numsA中每一个数都满足：</p><p>​    numsⅰ ≤ min numsj (i + 1 ≤  j  ≤  n  - 1 )</p><p>我们可以从大到小枚举 i，用minn记录民 numsj(i + 1 ≤  j  ≤  n  - 1)。每次移动i,都可以O（1）地更新minn。这样最后一个使得不等式成立的i即为left.</p><p>​    同理，我们可以用类似的方法确定right。我们可以通过一次循环同时完成左右边界的计算。</p><p>​    特别地，当原数组有序时，numB的长度为0，直接返回结果。</p><h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findUnsortedSubarray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> maxn = INT_MIN, right = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> minn = INT_MAX, left = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(maxn &gt; nums[i])</span><br><span class="line">                right = i;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                maxn = nums[i];</span><br><span class="line">            <span class="keyword">if</span>(minn &lt; nums[n - <span class="number">1</span> - i])</span><br><span class="line">                left = n - <span class="number">1</span> -i;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                minn = nums[n - <span class="number">1</span> - i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> right == <span class="number">-1</span> ? <span class="number">0</span> : right - left + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h2 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>​    <strong>时间复杂度：</strong>O(n)，其中 n 是给定数组的长度，我们仅需要遍历该数组一次。</p><p>​    <strong>空间复杂度：</strong>O(1)。我们只需要常数的空间保存若干变量。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;p&gt;给你一个整数数组 nums ，你需要找出一个 连续子数组 ，如果对这个子数组进行升序排序，那么整个数组都会变为升序排序。&lt;/p&gt;
+&lt;p&gt;请你找出符合题意的 最短 子数组，并输出它的长度。&lt;/p&gt;
+&lt;p&gt;来源：力扣（LeetC</summary>
+      
+    
+    
+    
+    
+    <category term="双指针" scheme="http://wangxu1905.github.io/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
+    
+  </entry>
   
   <entry>
     <title>743. 网络延迟时间</title>
@@ -140,9 +166,9 @@
     
     <category term="二叉树" scheme="http://wangxu1905.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
     
-    <category term="DFS" scheme="http://wangxu1905.github.io/tags/DFS/"/>
-    
     <category term="三元组" scheme="http://wangxu1905.github.io/tags/%E4%B8%89%E5%85%83%E7%BB%84/"/>
+    
+    <category term="DFS" scheme="http://wangxu1905.github.io/tags/DFS/"/>
     
   </entry>
   
@@ -249,9 +275,9 @@
     
     <category term="哈希表" scheme="http://wangxu1905.github.io/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
     
-    <category term="BFS" scheme="http://wangxu1905.github.io/tags/BFS/"/>
-    
     <category term="DFS" scheme="http://wangxu1905.github.io/tags/DFS/"/>
+    
+    <category term="BFS" scheme="http://wangxu1905.github.io/tags/BFS/"/>
     
   </entry>
   
