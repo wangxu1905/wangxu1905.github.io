@@ -14,7 +14,11 @@
       
         <tags>
             
-            <tag> DFS，三色标记，拓扑排序 </tag>
+            <tag> DFS </tag>
+            
+            <tag> 三色标记 </tag>
+            
+            <tag> 拓扑排序 </tag>
             
         </tags>
       
@@ -216,9 +220,9 @@
             
             <tag> 哈希表 </tag>
             
-            <tag> BFS </tag>
-            
             <tag> DFS </tag>
+            
+            <tag> BFS </tag>
             
         </tags>
       
