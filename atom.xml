@@ -6,7 +6,7 @@
   <link href="http://wangxu1905.github.io/atom.xml" rel="self"/>
   
   <link href="http://wangxu1905.github.io/"/>
-  <updated>2021-09-19T08:48:04.097Z</updated>
+  <updated>2021-09-20T03:31:51.239Z</updated>
   <id>http://wangxu1905.github.io/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>单链表逆置</title>
+    <link href="http://wangxu1905.github.io/2021/09/20/%E5%8D%95%E9%93%BE%E8%A1%A8%E5%90%88%E5%B9%B6/"/>
+    <id>http://wangxu1905.github.io/2021/09/20/%E5%8D%95%E9%93%BE%E8%A1%A8%E5%90%88%E5%B9%B6/</id>
+    <published>2021-09-20T03:23:56.023Z</published>
+    <updated>2021-09-20T03:31:51.239Z</updated>
+    
+    <content type="html"><![CDATA[<span id="more"></span><p>设有两个单链表A、B，其中元素递增有序，编写算法将A、B归并成一个按元素值递减（允许有相同值）有序的链表C，要求用A、B的原结点形成，不能重新申请节点。</p><h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><p>利用A、B两表有序的特点，依次进行比较，将当前较小值取出，插入到C表的头部，得到的C表为递降有序。</p><h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">LinkList <span class="title">merge</span><span class="params">(LinkList A, LinkList B)</span> </span>&#123;</span><br><span class="line">    LinkList C;</span><br><span class="line">    LinkNode *p, *q, *s;</span><br><span class="line">    p = A -&gt; next;</span><br><span class="line">    q = B -&gt; next;</span><br><span class="line">    C = A;</span><br><span class="line">    C -&gt; next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="built_in">free</span>(B);</span><br><span class="line">    <span class="keyword">while</span>(p &amp;&amp; q) &#123;</span><br><span class="line">        <span class="keyword">if</span>(p -&gt; data &lt; q -&gt; data) &#123;</span><br><span class="line">            s = p;</span><br><span class="line">            p = p -&gt; next;</span><br><span class="line">            s -&gt; next = C -&gt; next;</span><br><span class="line">            C -&gt; next = s;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="literal">NULL</span>)  p = q;</span><br><span class="line">    <span class="keyword">while</span>(p) &#123;</span><br><span class="line">        s = p;</span><br><span class="line">        p = p -&gt; next;</span><br><span class="line">        s -&gt; next = C -&gt; next;</span><br><span class="line">        C -&gt; next = s;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> C;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;p&gt;设有两个单链表A、B，其中元素递增有序，编写算法将A、B归并成一个按元素值递减（允许有相同值）有序的链表C，要求用A、B的原结点形成，不能重新申请节点。&lt;/p&gt;
+&lt;h2 id=&quot;算法思路&quot;&gt;&lt;a href=&quot;#算法思路&quot; c</summary>
+      
+    
+    
+    
+    
+    <category term="数据结构复习" scheme="http://wangxu1905.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>单链表逆置</title>
+    <link href="http://wangxu1905.github.io/2021/09/20/%E5%8D%95%E9%93%BE%E8%A1%A8%E9%80%86%E7%BD%AE/"/>
+    <id>http://wangxu1905.github.io/2021/09/20/%E5%8D%95%E9%93%BE%E8%A1%A8%E9%80%86%E7%BD%AE/</id>
+    <published>2021-09-20T03:20:55.150Z</published>
+    <updated>2021-09-20T03:23:48.190Z</updated>
+    
+    <content type="html"><![CDATA[<span id="more"></span><h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><p>依次取出原链表的每个结点，并将其作为第一个节点进行头插法，指针p用来指向原表中的当前节点，p为空时结束</p><h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">(LinkList head)</span> </span>&#123;</span><br><span class="line">    LinkNode *p, *q;</span><br><span class="line">    p = head -&gt; next;</span><br><span class="line">    head -&gt; next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">while</span>(p) &#123;</span><br><span class="line">        q = p;</span><br><span class="line">        p = p -&gt; next;</span><br><span class="line">        q -&gt; next = head -&gt; next;</span><br><span class="line">        head -&gt; next = q;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;h2 id=&quot;算法思路&quot;&gt;&lt;a href=&quot;#算法思路&quot; class=&quot;headerlink&quot; title=&quot;算法思路&quot;&gt;&lt;/a&gt;算法思路&lt;/h2&gt;&lt;p&gt;依次取出原链表的每个结点，并将其作为第一个节点进行头插法，指针p用来指向原</summary>
+      
+    
+    
+    
+    
+    <category term="数据结构复习" scheme="http://wangxu1905.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>19. 删除链表的倒数第 N 个结点</title>
@@ -383,9 +432,9 @@
     
     <category term="哈希表" scheme="http://wangxu1905.github.io/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
     
-    <category term="DFS" scheme="http://wangxu1905.github.io/tags/DFS/"/>
-    
     <category term="BFS" scheme="http://wangxu1905.github.io/tags/BFS/"/>
+    
+    <category term="DFS" scheme="http://wangxu1905.github.io/tags/DFS/"/>
     
   </entry>
   
