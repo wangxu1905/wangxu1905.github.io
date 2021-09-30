@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>C++ cin和getline</title>
+      <link href="/2021/09/30/C++%20cin%E5%92%8Cgetline/"/>
+      <url>/2021/09/30/C++%20cin%E5%92%8Cgetline/</url>
+      
+        <content type="html"><![CDATA[<span id="more"></span><p>​    cin是在缓存区里把字符读走，会剩下\n在缓存区中，但getline对\n非常敏感，导致getline刚开始读取缓存区里直接读到\n就结束读入数据。</p><p>​    cin，流提取运算符根据它后面的变量类型读取数据，从非空白符号开始，遇到Enter、Space、Tab键时结束。</p><p>​    getline函数从istream中读取一行数据，当遇到”\n”时结束返回。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    string s;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="built_in">getline</span>(cin,s);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;变量n : &quot;</span> &lt;&lt; n &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;字符串s : &quot;</span> &lt;&lt; s &lt;&lt; endl;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>![屏幕截图 2021-09-30 113205](C:\Users\Lenovo\Desktop\屏幕截图 2021-09-30 113205.png)</p><p>例如上面，输入123后，123赋值给n，字符串读取缓冲区的\n直接结束。</p><p>可以在 cin &gt;&gt; n;后面加上cin.ignore();或者getchar();来解决</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> C++函数 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>迷宫的最短路径</title>
       <link href="/2021/09/23/%E8%BF%B7%E5%AE%AB%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/"/>
       <url>/2021/09/23/%E8%BF%B7%E5%AE%AB%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/</url>
