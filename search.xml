@@ -246,7 +246,9 @@
       
         <tags>
             
-            <tag> 数据结构复习，回溯法 </tag>
+            <tag> 数据结构复习 </tag>
+            
+            <tag> 回溯法 </tag>
             
         </tags>
       
@@ -566,9 +568,9 @@
             
             <tag> 哈希表 </tag>
             
-            <tag> DFS </tag>
-            
             <tag> BFS </tag>
+            
+            <tag> DFS </tag>
             
         </tags>
       
