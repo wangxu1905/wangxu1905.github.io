@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>测试</title>
+      <link href="/2021/11/06/%E6%B5%8B%E8%AF%95/"/>
+      <url>/2021/11/06/%E6%B5%8B%E8%AF%95/</url>
+      
+        <content type="html"><![CDATA[<span id="more"></span><p><img src="/2021/11/06/%E6%B5%8B%E8%AF%95/flag.png"></p><p><img src="https://tse1-mm.cn.bing.net/th/id/R-C.6e2a7d7ecb7202c7145e9966794b3248?rik=5DRSyuQWDE8Weg&riu=http://up.36992.com/pic/9b/55/28/9b55289650cbc404d43c6e9bcc508588.jpg&ehk=fv6Eh69nmHC3wh9CJlGEJUJv53qxB4BLKiExF5ItWI0=&risl=&pid=ImgRaw&r=0"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 测试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>7-3 顺序存储的二叉树的最近的公共祖先问题 (20 分)</title>
+      <link href="/2021/11/05/7-3%20%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E7%9A%84%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%E9%97%AE%E9%A2%98%20(20%20%E5%88%86)/"/>
+      <url>/2021/11/05/7-3%20%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E7%9A%84%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88%E9%97%AE%E9%A2%98%20(20%20%E5%88%86)/</url>
+      
+        <content type="html"><![CDATA[<span id="more"></span><p>设顺序存储的二叉树中有编号为<em>i</em>和<em>j</em>的两个结点，请设计算法求出它们最近的公共祖先结点的编号和值。</p><h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h3><p>输入第1行给出正整数<em>n</em>（≤1000），即顺序存储的最大容量；第2行给出<em>n</em>个非负整数，其间以空格分隔。其中0代表二叉树中的空结点（如果第1个结点为0，则代表一棵空树）；第3行给出一对结点编号<em>i</em>和<em>j</em>。</p><p>题目保证输入正确对应一棵二叉树，且1≤<em>i</em>,<em>j</em>≤<em>n</em>。</p><h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h3><p>如果<em>i</em>或<em>j</em>对应的是空结点，则输出<code>ERROR: T[x] is NULL</code>，其中<code>x</code>是<em>i</em>或<em>j</em>中先发现错误的那个编号；否则在一行中输出编号为<em>i</em>和<em>j</em>的两个结点最近的公共祖先结点的编号和值，其间以1个空格分隔。</p><h3 id="输入样例1："><a href="#输入样例1：" class="headerlink" title="输入样例1："></a>输入样例1：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">15</span></span><br><span class="line"><span class="number">4</span> <span class="number">3</span> <span class="number">5</span> <span class="number">1</span> <span class="number">10</span> <span class="number">0</span> <span class="number">7</span> <span class="number">0</span> <span class="number">2</span> <span class="number">0</span> <span class="number">9</span> <span class="number">0</span> <span class="number">0</span> <span class="number">6</span> <span class="number">8</span></span><br><span class="line"><span class="number">11</span> <span class="number">4</span>结尾无空行</span><br></pre></td></tr></table></figure><h3 id="输出样例1："><a href="#输出样例1：" class="headerlink" title="输出样例1："></a>输出样例1：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span> <span class="number">3</span></span><br><span class="line">结尾无空行</span><br></pre></td></tr></table></figure><h3 id="输入样例2："><a href="#输入样例2：" class="headerlink" title="输入样例2："></a>输入样例2：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">15</span></span><br><span class="line"><span class="number">4</span> <span class="number">3</span> <span class="number">5</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">7</span> <span class="number">0</span> <span class="number">2</span> <span class="number">0</span> <span class="number">9</span> <span class="number">0</span> <span class="number">0</span> <span class="number">6</span> <span class="number">8</span></span><br><span class="line"><span class="number">12</span> <span class="number">8</span></span><br></pre></td></tr></table></figure><h3 id="输出样例2："><a href="#输出样例2：" class="headerlink" title="输出样例2："></a>输出样例2：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR: T[<span class="number">12</span>] is <span class="literal">NULL</span></span><br></pre></td></tr></table></figure><h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N;</span><br><span class="line">    cin &gt;&gt; N;</span><br><span class="line">    <span class="keyword">int</span> tree[N + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">memset</span>(tree,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(tree));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N ; ++i)</span><br><span class="line">        cin &gt;&gt; tree[i];</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(tree[a] == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;ERROR: T[%d] is NULL&quot;</span>,a);<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(tree[b] == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;ERROR: T[%d] is NULL&quot;</span>,b);<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(a == b)&#123;</span><br><span class="line">            cout &lt;&lt; a &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; tree[a] &lt;&lt; endl;<span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//让序号大的找父亲</span></span><br><span class="line">        <span class="keyword">if</span>(a &gt; b)   a /= <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">else</span>        b /= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 周练习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>08-图9 关键活动 (30 分)</title>
       <link href="/2021/11/03/08-%E5%9B%BE9%20%E5%85%B3%E9%94%AE%E6%B4%BB%E5%8A%A8%20(30%20%E5%88%86)/"/>
       <url>/2021/11/03/08-%E5%9B%BE9%20%E5%85%B3%E9%94%AE%E6%B4%BB%E5%8A%A8%20(30%20%E5%88%86)/</url>
