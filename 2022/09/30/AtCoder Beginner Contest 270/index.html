@@ -1,0 +1,334 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AtCoder Beginner Contest 270 | Moon</title><meta name="keywords" content="博弈论,最小生成树,思维,势能线段树"><meta name="author" content="Moon"><meta name="copyright" content="Moon"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="D - Stones题目链接D - Stones (atcoder.jp) 题目描述​    有一堆石头，有n个石子和一个数组集合，两个人玩游戏，每个人每次可以从数组集合中选择一个数，表示拿走这么多的石子，请问在两个人都最优的那石子的情况下，先手最多能拿多少石子 算法思路​    由于数据量很小，可以考虑记忆化搜索，我们定义$f[i][0&#x2F;1]$表示这一步是Alice或者Bob能够使得两人石子">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AtCoder Beginner Contest 270">
+<meta property="og:url" content="http://wangxu1905.github.io/2022/09/30/AtCoder%20Beginner%20Contest%20270/index.html">
+<meta property="og:site_name" content="Moon">
+<meta property="og:description" content="D - Stones题目链接D - Stones (atcoder.jp) 题目描述​    有一堆石头，有n个石子和一个数组集合，两个人玩游戏，每个人每次可以从数组集合中选择一个数，表示拿走这么多的石子，请问在两个人都最优的那石子的情况下，先手最多能拿多少石子 算法思路​    由于数据量很小，可以考虑记忆化搜索，我们定义$f[i][0&#x2F;1]$表示这一步是Alice或者Bob能够使得两人石子">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://wangxu1905.github.io/img/fm.jpg">
+<meta property="article:published_time" content="2022-09-30T03:20:40.111Z">
+<meta property="article:modified_time" content="2022-10-08T10:03:54.592Z">
+<meta property="article:author" content="Moon">
+<meta property="article:tag" content="博弈论">
+<meta property="article:tag" content="最小生成树">
+<meta property="article:tag" content="思维">
+<meta property="article:tag" content="势能线段树">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://wangxu1905.github.io/img/fm.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://wangxu1905.github.io/2022/09/30/AtCoder%20Beginner%20Contest%20270/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Moon","link":"链接: ","source":"来源: Moon","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'AtCoder Beginner Contest 270',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-08 18:03:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    document.addEventListener('pjax:complete', detectApple)})(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Moon" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/IU.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">291</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">113</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">29</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/fm.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Moon</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">AtCoder Beginner Contest 270</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-30T03:20:40.111Z" title="发表于 2022-09-30 11:20:40">2022-09-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-08T10:03:54.592Z" title="更新于 2022-10-08 18:03:54">2022-10-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Atcoder/">Atcoder</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Atcoder/ABC270/">ABC270</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="AtCoder Beginner Contest 270"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><span id="more"></span>
+
+<h1 id="D-Stones"><a href="#D-Stones" class="headerlink" title="D - Stones"></a><strong>D - Stones</strong></h1><h2 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h2><p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc270/tasks/abc270_d">D - Stones (atcoder.jp)</a></p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>​    有一堆石头，有n个石子和一个数组集合，两个人玩游戏，每个人每次可以从数组集合中选择一个数，表示拿走这么多的石子，请问在两个人都最优的那石子的情况下，先手最多能拿多少石子</p>
+<h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><p>​    由于数据量很小，可以考虑记忆化搜索，我们定义$f[i][0/1]$表示这一步是Alice或者Bob能够使得两人石子之差最大/最小是多少，跑一遍记忆化搜索即可。Alice取max，Bob取min。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">差值为k,则Alice为x + k,Bob为x</span><br><span class="line">    则x + k + x = n，解得x = (n - k) / <span class="number">2</span></span><br><span class="line">    那么Alice：x + k = (n - k) / <span class="number">2</span> + k = (n + k) / <span class="number">2</span></span><br><span class="line">    				= (n + <span class="built_in">dfs</span>(n,<span class="number">0</span>)) / <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,k,p,idx,a[N],b[N],f[N][<span class="number">2</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> now)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">0</span>)  <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">if</span>(f[n][now] != <span class="number">-1</span>)    <span class="keyword">return</span> f[n][now];</span><br><span class="line">    <span class="keyword">if</span>(now)&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">1e9</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; ++i)</span><br><span class="line">            <span class="keyword">if</span>(n &gt;= a[i])   res = <span class="built_in">min</span>(res,<span class="built_in">dfs</span>(n - a[i],<span class="number">0</span>) - a[i]);</span><br><span class="line">        <span class="keyword">return</span> f[n][now] = res;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">-1e9</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; ++i)</span><br><span class="line">            <span class="keyword">if</span>(n &gt;= a[i])   res = <span class="built_in">max</span>(res,<span class="built_in">dfs</span>(n - a[i],<span class="number">1</span>) + a[i]);</span><br><span class="line">        <span class="keyword">return</span> f[n][now] = res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">-1</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(f));</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; ++i) cin &gt;&gt; a[i];</span><br><span class="line">    cout &lt;&lt; (n + <span class="built_in">dfs</span>(n,<span class="number">0</span>)) / <span class="number">2</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="E-Apple-Baskets-on-Circle"><a href="#E-Apple-Baskets-on-Circle" class="headerlink" title="E - Apple Baskets on Circle"></a><strong>E - Apple Baskets on Circle</strong></h1><h2 id="题目链接-1"><a href="#题目链接-1" class="headerlink" title="题目链接"></a>题目链接</h2><p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc270/tasks/abc270_e">E - Apple Baskets on Circle (atcoder.jp)</a></p>
+<h2 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h2><p>​    有n个篮子，每个篮子里都有一些苹果，从第一个篮子开始，如果篮子里有苹果，则吃掉一个。然后走到下一个篮子，所有的篮子围成环形，求这个人吃掉k个苹果后的每个篮子里还剩下多少个苹果。</p>
+<h2 id="算法思路-1"><a href="#算法思路-1" class="headerlink" title="算法思路"></a>算法思路</h2><p>​    调了4个小时。。。哎</p>
+<p>​    为了减少修改线段树结点的次数，我们每次都是尽可能地把修改的值提高到最大。</p>
+<p>​    线段树维护的是区间能吃的篮子的数量cnt，区间除0外的区间的苹果最小值minv（如果为0的话，可以定义成INF），tag为懒标记，标记为吃的苹果数量</p>
+<p>​    我们每一次都吃掉所有有苹果篮子的最小值的苹果，前提是k还足够的情况下，如果k不够的话，那么就向下取整，如果k都不够所有有苹果篮子的数量，直接循环遍历一遍即可，反正也才O（n）</p>
+<p>​    如果某一个篮子的苹果被吃完了，则要下放到叶子结点去，将该节点做上标记，并将最小值赋值成INF，cnt = 0，这样就不会影响到其他有苹果的篮子的最小值。</p>
+<p>​    还有注意最后查询a[i]的值的时候，别用minv和1e12，判断，要用cnt判断，血的教训，数据真大，1e18吃到了1e12一下，WA了好多发</p>
+<h2 id="AC代码-1"><a href="#AC代码-1" class="headerlink" title="AC代码"></a>AC代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IOS ios::sync_with_stdio(false); cin.tie(0);cout.tie(0);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> endl <span class="meta-string">&#x27;\n&#x27;</span> </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e5</span> + <span class="number">5</span>,INF = <span class="number">1e18</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l,r,cnt,minv,tag;</span><br><span class="line">&#125;tr[N * <span class="number">4</span>];</span><br><span class="line"><span class="keyword">int</span> n,m,k,t,a[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushup</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">    tr[u].cnt = tr[u &lt;&lt; <span class="number">1</span>].cnt + tr[u &lt;&lt; <span class="number">1</span> | <span class="number">1</span>].cnt;</span><br><span class="line">    tr[u].minv = <span class="built_in">min</span>(tr[u &lt;&lt; <span class="number">1</span>].minv,tr[u &lt;&lt; <span class="number">1</span> | <span class="number">1</span>].minv);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushadd</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">    <span class="comment">//如果结点不为0，则进行修改</span></span><br><span class="line">    <span class="keyword">if</span>(tr[u].cnt &amp;&amp; c)&#123;</span><br><span class="line">        tr[u].tag += c;</span><br><span class="line">        tr[u].minv -= c;</span><br><span class="line">        <span class="comment">//修改后，结点为0，则赋值成INF</span></span><br><span class="line">        <span class="keyword">if</span>(tr[u].minv == <span class="number">0</span>) tr[u].minv = INF,tr[u].cnt = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">    <span class="built_in">pushadd</span>(u &lt;&lt; <span class="number">1</span>,tr[u].tag);</span><br><span class="line">    <span class="built_in">pushadd</span>(u &lt;&lt; <span class="number">1</span> | <span class="number">1</span>,tr[u].tag);</span><br><span class="line">    tr[u].tag = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">    tr[u] = &#123;l,r&#125;;</span><br><span class="line">    <span class="keyword">if</span>(l == r)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[l] &gt; <span class="number">0</span>)    tr[u].minv = a[l],tr[u].cnt = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span>    tr[u].minv = INF,tr[u].cnt = <span class="number">0</span>;</span><br><span class="line">        tr[u].tag = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">build</span>(u &lt;&lt; <span class="number">1</span>,l,mid),<span class="built_in">build</span>(u &lt;&lt; <span class="number">1</span> | <span class="number">1</span>,mid + <span class="number">1</span>,r);</span><br><span class="line">    <span class="built_in">pushup</span>(u);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">    <span class="comment">//叶结点直接修改</span></span><br><span class="line">    <span class="keyword">if</span>(tr[u].l == tr[u].r)&#123;</span><br><span class="line">        <span class="built_in">pushadd</span>(u,c);<span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果还用剩余，只需要修改</span></span><br><span class="line">    <span class="keyword">if</span>(tr[u].minv &gt; c)&#123;</span><br><span class="line">        <span class="built_in">pushadd</span>(u,c);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">//如果变为0了，则下放到叶结点</span></span><br><span class="line">        <span class="built_in">pushdown</span>(u);</span><br><span class="line">        <span class="built_in">modify</span>(u &lt;&lt; <span class="number">1</span>,c);</span><br><span class="line">        <span class="built_in">modify</span>(u &lt;&lt; <span class="number">1</span> | <span class="number">1</span>,c);</span><br><span class="line">        <span class="built_in">pushup</span>(u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">    <span class="comment">//用cnt判断是否为0</span></span><br><span class="line">    <span class="keyword">if</span>(tr[u].l == tr[u].r)&#123;</span><br><span class="line">        a[tr[u].l] = (tr[u].cnt) ? tr[u].minv : <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">pushdown</span>(u);</span><br><span class="line">    <span class="built_in">query</span>(u &lt;&lt; <span class="number">1</span>),<span class="built_in">query</span>(u &lt;&lt; <span class="number">1</span> | <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    IOS;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) cin &gt;&gt; a[i];</span><br><span class="line">    <span class="built_in">build</span>(<span class="number">1</span>,<span class="number">1</span>,n);</span><br><span class="line">    <span class="comment">//如果k大于能吃的篮子的数量</span></span><br><span class="line">    <span class="keyword">while</span>(k &gt; tr[<span class="number">1</span>].cnt)&#123;</span><br><span class="line">        <span class="keyword">int</span> num = tr[<span class="number">1</span>].cnt * tr[<span class="number">1</span>].minv;</span><br><span class="line">        <span class="keyword">if</span>(num &lt;= k)&#123;</span><br><span class="line">            k -= num;</span><br><span class="line">            <span class="built_in">modify</span>(<span class="number">1</span>,tr[<span class="number">1</span>].minv);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//不够的话，则向下取整</span></span><br><span class="line">            <span class="keyword">int</span> c = k / tr[<span class="number">1</span>].cnt;</span><br><span class="line">            k -= c * tr[<span class="number">1</span>].cnt;</span><br><span class="line">            <span class="built_in">modify</span>(<span class="number">1</span>,c);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">query</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(k &amp;&amp; a[i])    a[i] -= <span class="number">1</span>,k--;</span><br><span class="line">        cout &lt;&lt; a[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="F-Transportation"><a href="#F-Transportation" class="headerlink" title="F - Transportation"></a><strong>F - Transportation</strong></h1><h2 id="题目链接-2"><a href="#题目链接-2" class="headerlink" title="题目链接"></a>题目链接</h2><p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc270/tasks/abc270_f">F - Transportation (atcoder.jp)</a></p>
+<h2 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h2><p>​    有n个岛屿，每次可以建三种道路，第一种：在两个岛屿之间建桥，第二种：在某一个岛屿上建立港口，所有建立港口的岛屿之间可以互相连接，第三种：在某一个岛屿上建立飞机场，所以建立飞机场的岛屿之间可以互相连接，求n个岛屿的最小生成树</p>
+<h2 id="算法思路-2"><a href="#算法思路-2" class="headerlink" title="算法思路"></a>算法思路</h2><p>​    如果只考虑道路，那么就是个普通的最小生成树。但是考虑港口和飞机场的话，我们可以建立虚拟源点，作为港口的中转站或者飞机场的中转站，然后由此进行求解最小生成树，然后我们枚举是否建立港口或者飞机场即可</p>
+<p>​    注意每次Kruskal排序，都会打乱顺序，所以要重新添加道路信息</p>
+<p>​    虽说一共有七种组合：陆、海、空、陆海、路空、海空、陆海空</p>
+<p>​    但是单独的海、空很好计算，直接相加即可，也可以归到陆海和路空里，因为把道路考虑进去，只能使答案更小或者不变，不可能变大；同理海空可以归到陆海空里。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">港口的集合结点为<span class="number">1</span>，新要添加的结点为<span class="number">2</span></span><br><span class="line">    如果在<span class="number">2</span>建立港口代价为x，<span class="number">2</span>与港口集合中某一座岛屿建立道路代价为y</span><br><span class="line">    <span class="number">1.</span>x &gt; y，选择建立道路，对于后序结点选择是否建立港口没有影响，因为建立港口的代价只与自身有关</span><br><span class="line">    <span class="number">2.</span>x &lt; y，选择建立港口，对于后序答案无影响</span><br><span class="line">    <span class="number">3.</span>x == y,建什么都行，理由同上</span><br><span class="line">    </span><br><span class="line">主要是因为建立港口和飞机场的代价只与自身有关，道路的建立不影响是否建立港口和飞机场</span><br></pre></td></tr></table></figure>
+
+<h2 id="AC代码-2"><a href="#AC代码-2" class="headerlink" title="AC代码"></a>AC代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IOS ios::sync_with_stdio(false); cin.tie(0);cout.tie(0);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> endl <span class="meta-string">&#x27;\n&#x27;</span> </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e5</span> + <span class="number">5</span>,M = <span class="number">6e5</span> + <span class="number">5</span>,INF = <span class="number">1e18</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> u,v,w;</span><br><span class="line">    <span class="built_in">Edge</span>() &#123;&#125;</span><br><span class="line">    <span class="built_in">Edge</span>(<span class="keyword">int</span> _u,<span class="keyword">int</span> _v,<span class="keyword">int</span> _w)&#123;</span><br><span class="line">        u = _u,v = _v,w = _w;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> Edge &amp;a,<span class="keyword">const</span> Edge &amp;b)&#123;</span><br><span class="line">        <span class="keyword">return</span> a.w &lt; b.w;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;e[M],e1[N];</span><br><span class="line"><span class="keyword">int</span> n,m,k,t,len,a[N],b[N],f[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(f[x] == <span class="number">-1</span>)   <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">return</span> f[x] = <span class="built_in">find</span>(f[x]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Kruskal</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> m)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) f[i] = <span class="number">-1</span>;</span><br><span class="line">    <span class="built_in">sort</span>(e + <span class="number">1</span>, e + <span class="number">1</span> + m);</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>,cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)&#123;</span><br><span class="line">        <span class="keyword">int</span> u = e[i].u,v = e[i].v,w = e[i].w;</span><br><span class="line">        <span class="keyword">int</span> fa = <span class="built_in">find</span>(u),fb = <span class="built_in">find</span>(v);</span><br><span class="line">        <span class="keyword">if</span>(fa != fb)&#123;</span><br><span class="line">            f[fb] = fa;</span><br><span class="line">            res += w;</span><br><span class="line">            cnt++; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(cnt == n - <span class="number">1</span>)    <span class="keyword">return</span> res;</span><br><span class="line">    <span class="keyword">else</span>    <span class="keyword">return</span> INF;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) cin &gt;&gt; a[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) cin &gt;&gt; b[i];</span><br><span class="line">    <span class="keyword">int</span> res = INF;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)&#123;</span><br><span class="line">        <span class="keyword">int</span> u,v,w;</span><br><span class="line">        cin &gt;&gt; u &gt;&gt; v &gt;&gt; w;</span><br><span class="line">        e1[i] = <span class="built_in">Edge</span>(u,v,w);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//建道路</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) e[i] = e1[i];</span><br><span class="line">    res = <span class="built_in">min</span>(res,<span class="built_in">Kruskal</span>(n,m));</span><br><span class="line">    <span class="comment">//建道路、机场</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) e[i] = e1[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        e[i + m] = <span class="built_in">Edge</span>(i,n + <span class="number">1</span>,a[i]);</span><br><span class="line">    res = <span class="built_in">min</span>(res,<span class="built_in">Kruskal</span>(n + <span class="number">1</span>,n + m));</span><br><span class="line">    <span class="comment">//建道路、港口</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) e[i] = e1[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        e[i + m] = <span class="built_in">Edge</span>(i,n + <span class="number">1</span>,b[i]);</span><br><span class="line">    res = <span class="built_in">min</span>(res,<span class="built_in">Kruskal</span>(n + <span class="number">1</span>,n + m));</span><br><span class="line">    <span class="comment">//建道路、机场和港口</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) e[i] = e1[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        e[i + m] = <span class="built_in">Edge</span>(i,n + <span class="number">1</span>,a[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)&#123;</span><br><span class="line">        e[i + m + n] = <span class="built_in">Edge</span>(i,n + <span class="number">2</span>,b[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    res = <span class="built_in">min</span>(res,<span class="built_in">Kruskal</span>(n + <span class="number">2</span>,<span class="number">2</span> * n + m));</span><br><span class="line">    cout &lt;&lt; res &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Moon</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://wangxu1905.github.io/2022/09/30/AtCoder%20Beginner%20Contest%20270/">http://wangxu1905.github.io/2022/09/30/AtCoder%20Beginner%20Contest%20270/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://wangxu1905.github.io" target="_blank">Moon</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/">博弈论</a><a class="post-meta__tags" href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a><a class="post-meta__tags" href="/tags/%E6%80%9D%E7%BB%B4/">思维</a><a class="post-meta__tags" href="/tags/%E5%8A%BF%E8%83%BD%E7%BA%BF%E6%AE%B5%E6%A0%91/">势能线段树</a></div><div class="post_share"><div class="social-share" data-image="/img/fm.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/09/30/The%202022%20ICPC%20Asia%20Regionals%20Online%20Contest%20(II)/"><img class="prev-cover" src="/img/fm.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">The 2022 ICPC Asia Regionals Online Contest (II)</div></div></a></div><div class="next-post pull-right"><a href="/2022/09/30/Educational%20Codeforces%20Round%20136%20(Rated%20for%20Div.%202)/"><img class="next-cover" src="/img/fm.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Educational Codeforces Round 136 (Rated for Div. 2)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/10/06/AtCoder Beginner Contest 271/" title="AtCoder Beginner Contest 271"><img class="cover" src="/img/fm.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-06</div><div class="title">AtCoder Beginner Contest 271</div></div></a></div><div><a href="/2022/09/30/Educational Codeforces Round 136 (Rated for Div. 2)/" title="Educational Codeforces Round 136 (Rated for Div. 2)"><img class="cover" src="/img/fm.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-30</div><div class="title">Educational Codeforces Round 136 (Rated for Div. 2)</div></div></a></div><div><a href="/2022/09/30/The 2022 ICPC Asia Regionals Online Contest (II)/" title="The 2022 ICPC Asia Regionals Online Contest (II)"><img class="cover" src="/img/fm.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-30</div><div class="title">The 2022 ICPC Asia Regionals Online Contest (II)</div></div></a></div><div><a href="/2022/07/17/2022 [蓝桥杯2022初赛] 灭鼠先锋/" title="2022 [蓝桥杯2022初赛] 灭鼠先锋"><img class="cover" src="/img/fm.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-17</div><div class="title">2022 [蓝桥杯2022初赛] 灭鼠先锋</div></div></a></div><div><a href="/2022/07/21/Alice and Bob/" title="Alice and Bob"><img class="cover" src="/img/fm.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-21</div><div class="title">Alice and Bob</div></div></a></div><div><a href="/2022/07/23/杭电多校第二场/" title="杭电多校第二场"><img class="cover" src="/img/fm.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-23</div><div class="title">杭电多校第二场</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#D-Stones"><span class="toc-number">1.</span> <span class="toc-text">D - Stones</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E9%93%BE%E6%8E%A5"><span class="toc-number">1.1.</span> <span class="toc-text">题目链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF"><span class="toc-number">1.3.</span> <span class="toc-text">算法思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AC%E4%BB%A3%E7%A0%81"><span class="toc-number">1.4.</span> <span class="toc-text">AC代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#E-Apple-Baskets-on-Circle"><span class="toc-number">2.</span> <span class="toc-text">E - Apple Baskets on Circle</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E9%93%BE%E6%8E%A5-1"><span class="toc-number">2.1.</span> <span class="toc-text">题目链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">2.2.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.3.</span> <span class="toc-text">算法思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AC%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.4.</span> <span class="toc-text">AC代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#F-Transportation"><span class="toc-number">3.</span> <span class="toc-text">F - Transportation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E9%93%BE%E6%8E%A5-2"><span class="toc-number">3.1.</span> <span class="toc-text">题目链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-2"><span class="toc-number">3.2.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.3.</span> <span class="toc-text">算法思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AC%E4%BB%A3%E7%A0%81-2"><span class="toc-number">3.4.</span> <span class="toc-text">AC代码</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2023 By Moon</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">簡</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'r6DVD3cuJ6mdCOGjGY4HdU1h-gzGzoHsz',
+      appKey: '7eh84qOk9iNpFRRgtWhh8b0R',
+      placeholder: '记得留下你的昵称和邮箱。。。可以收到快速回复',
+      avatar: '/img/iu1.jpg',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"]):not([href="music"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+  window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":null,"use":"live2d-widget-model-wanko","display":null,"position":"right","width":150,"height":300,"mobile":null,"show":true,"react":null,"opacity":0.7,"log":false});</script></body></html>
